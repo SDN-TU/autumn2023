@@ -1,1 +1,0 @@
-RUN mininet Topology with 1)Switch & 2)Controller Use ryu controller to print ARP header input detected by the switch after h1 pings h2. Print only ARP Source destination mac & ARP Source destination iP.
