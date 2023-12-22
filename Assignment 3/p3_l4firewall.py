@@ -1,30 +1,3 @@
-        #out_port = self.mac_to_port[dpid][dst]
-        #print(out_port)
-        
-        #print(msg.in_port)
-        
-        #if msg.in_port == 65531:
-        #    return
-        
-        #if tcp_port:
-        #    dst_p = tcp_port.dst_port
-        #    src_p = tcp_port.src_port
-        #    
-        #    if(src_p, dst_p) in self.port_nos:
-        #        return 
-        #else:
-        #    pass
-        
-        #print(tcp_port)
-        
-
-        
-        #print(out_port)
-        #if(out_port, msg.in_port) in self.port_nos:
-        #   actions = []
-        #   return
-         
-
 """
 An OpenFlow 1.0 L2 learning switch implementation.
 """
