@@ -3,5 +3,4 @@ Write a ryu controller code such that it prints ARP header information by the sw
 
 
 Print  1.) ARP source & destination MAC
-
        2.) ARP source & destination IP
