@@ -1,9 +1,10 @@
-Question 3-->
-Write a ryu controller code for any topology such that communication is not available on a certain port. For e.g. in the following topology:
-	
-				controller
-				/    	\
-			       /    	 \
-			      h1  	  h2
+Question 5-->
+Write a a topology with 4 host machines, such that 2 host are on one VLAN id(say 100), while the other two are on another VLAN id(say 200)
 
-if: port 50,000 is blocked then if h1 tries to send tcp packets to h2 on port 50,000 then, it should not allowed.
+				controller
+				/  /  \  \
+			       /  /    \  \
+			      h1 h2    h3 h4
+			 (VLAN 100)	(VLAN 200)
+
+Then if h1 tries to ping h3 or h4 it will not ping, same goes for h2.
