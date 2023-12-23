@@ -14,7 +14,7 @@ To create a Layer 2 firewall using Ryu controller and Mininet, preventing specif
 
 
 Assignment 3:
-Implementing a layer 4 firewall using Ryu controller and Mininet. The goal is to create a firewall that will block traffic on a specific port, such as port 80
+Implementing a layer 4 firewall using Ryu controller and Mininet. The goal is to create a firewall that will block traffic on a specific port, such as port 90
 
 <img width="913" alt="assign3" src="https://github.com/SDN-TU/autumn2023/assets/108898063/9d7402a1-d03f-42c2-9e0f-9ada77441d40">
 
