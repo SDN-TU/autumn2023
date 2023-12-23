@@ -9,6 +9,9 @@ Write a ryu controller code that filters ARP and MAC packets and prints informat
 Assignment 2:
 To create a Layer 2 firewall using Ryu controller and Mininet, preventing specific hosts from pinging each other.
 
+<img width="922" alt="assign2" src="https://github.com/SDN-TU/autumn2023/assets/108898063/3a518a28-a9e5-43e0-a56b-d3a35a9a3da3">
+
+
 Assignment 3:
 Implementing a layer 4 firewall using Ryu controller and Mininet. The goal is to create a firewall that will block traffic on a specific port, such as port 80
 
