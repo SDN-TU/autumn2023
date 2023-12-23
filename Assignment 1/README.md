@@ -1,1 +1,4 @@
-Question--> Write a ryu controller code such that it prints, the ARP packet header information, i.e source, destination, inport, dpid.
+# Assignment 1
+**Filter ARP and MAC Packets**
+
+Write a ryu controller code that filters ARP and MAC packets and prints information about them like source MAC address and IP address.
