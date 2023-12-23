@@ -22,6 +22,9 @@ Implementing a layer 4 firewall using Ryu controller and Mininet. The goal is to
 Assignment 5:
 h1 and h3 are assigned VLAN ID 100. h2 and h4 are assigned VLAN ID 200.
 
+<img width="920" alt="assign4" src="https://github.com/SDN-TU/autumn2023/assets/108898063/fae51b27-2747-4ebe-a4ef-ab28bdc071a4">
+
+
 Assignment 7:
 Implementing a pipeline using OpenFlow v1.3 with Ryu controller and Mininet. The pipeline involves two tables: table0 for blocking packets based on IP addresses and table1 for blocking packets based on TCP ports.
 
