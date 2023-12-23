@@ -4,7 +4,8 @@ SDN &amp; NFV CO520/CS638 assignments
 Assignment 1:
 Write a ryu controller code that filters ARP and MAC packets and prints information about them like source MAC address and IP address.
 
-<img width="686" alt="Screenshot 2023-12-16 135424" src="https://github.com/SDN-TU/autumn2023/assets/108898063/63456cc3-7384-4382-ae3b-efb771ee62e2">
+<img width="920" alt="assign1" src="https://github.com/SDN-TU/autumn2023/assets/108898063/405b3e98-25e4-4b6a-b0ea-ca04fe1401d9">
+
 
 Assignment 2:
 To create a Layer 2 firewall using Ryu controller and Mininet, preventing specific hosts from pinging each other.
