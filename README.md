@@ -28,4 +28,7 @@ h1 and h3 are assigned VLAN ID 100. h2 and h4 are assigned VLAN ID 200.
 Assignment 7:
 Implementing a pipeline using OpenFlow v1.3 with Ryu controller and Mininet. The pipeline involves two tables: table0 for blocking packets based on IP addresses and table1 for blocking packets based on TCP ports.
 
+<img width="917" alt="assign7 py" src="https://github.com/SDN-TU/autumn2023/assets/108898063/0f5cfd87-fa7b-4c2e-a920-eeb97d55f053">
+
+
 
