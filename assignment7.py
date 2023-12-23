@@ -1,3 +1,18 @@
+# Copyright (C) 2011 Nippon Telegraph and Telephone Corporation.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from ryu.base import app_manager
 from ryu.controller import ofp_event
 from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
@@ -9,10 +24,10 @@ from ryu.lib.packet import ether_types
 from ryu.lib.packet import ipv4
 from ryu.lib.packet import in_proto
 
-IP_FILTER_TABLE = 10
-FORWARD_TABLE = 30
-TCP_FILTER_TABLE= 20
- 
+FILTER_TABLE = 5
+FORWARD_TABLE = 10
+TCP_FILTER_TABLE=6
+
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
@@ -26,6 +41,13 @@ class SimpleSwitch13(app_manager.RyuApp):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
 
+        # install table-miss flow entry
+        #
+        # We specify NO BUFFER to max_len of the output action due to
+        # OVS bug. At this moment, if we specify a lesser number, e.g.,
+        # 128, OVS will send Packet-In with invalid buffer_id and
+        # truncated packet data. In that case, we cannot output packets
+        # correctly.  The bug has been fixed in OVS v2.1.0.
         match = parser.OFPMatch()
         actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER,
                                           ofproto.OFPCML_NO_BUFFER)]
@@ -33,10 +55,10 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         # adding default tables/rules in the startup
         self.add_default_table(datapath)
-        self.add_blockip_table1(datapath)
-        self.add_tcpblock_table2(datapath)
-        self.apply_ipblock(datapath)
-        self.apply_portblock(datapath)
+        self.add_filter_table1(datapath)
+        self.add_filter_table2(datapath)
+        self.apply_filter_ip(datapath)
+        self.apply_filter_port(datapath)
 
     def add_flow(self, datapath, priority, match, actions, buffer_id=None):
         ofproto = datapath.ofproto
@@ -57,19 +79,19 @@ class SimpleSwitch13(app_manager.RyuApp):
     def add_default_table(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
-        inst = [parser.OFPInstructionGotoTable(IP_FILTER_TABLE)]
+        inst = [parser.OFPInstructionGotoTable(FILTER_TABLE)]
         mod = parser.OFPFlowMod(datapath=datapath, table_id=0, instructions=inst)
         datapath.send_msg(mod)
 
-    def add_blockip_table1(self, datapath):
+    def add_filter_table1(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         inst = [parser.OFPInstructionGotoTable(TCP_FILTER_TABLE)]
-        mod = parser.OFPFlowMod(datapath=datapath, table_id=IP_FILTER_TABLE, 
+        mod = parser.OFPFlowMod(datapath=datapath, table_id=FILTER_TABLE, 
                                 priority=1, instructions=inst)
         datapath.send_msg(mod)
         
-    def add_tcpblock_table2(self, datapath):
+    def add_filter_table2(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         inst = [parser.OFPInstructionGotoTable(FORWARD_TABLE)]
@@ -77,16 +99,16 @@ class SimpleSwitch13(app_manager.RyuApp):
                                 priority=1, instructions=inst)
         datapath.send_msg(mod)
         
-    def apply_ipblock(self, datapath):
+    def apply_filter_ip(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         match = parser.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ipv4_src='10.0.0.1', ipv4_dst='10.0.0.2')
-        mod = parser.OFPFlowMod(datapath=datapath, table_id=IP_FILTER_TABLE,
+        mod = parser.OFPFlowMod(datapath=datapath, table_id=FILTER_TABLE,
                                 priority=10000, match=match)
                                 
         datapath.send_msg(mod)
 
-    def apply_portblock(self, datapath):
+    def apply_filter_port(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         match = parser.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ip_proto=6,ipv4_src='10.0.0.3', ipv4_dst='10.0.0.4', tcp_dst=5500)
