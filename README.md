@@ -21,7 +21,7 @@ Implementing a layer 4 firewall using Ryu controller and Mininet. The goal is to
 
 
 Assignment 5:
-h1 and h3 are assigned VLAN ID 100. h2 and h4 are assigned VLAN ID 200.
+h1 and h2 are assigned VLAN ID 100. h3 and h4 are assigned VLAN ID 200.
 
 <img width="920" alt="assign4" src="https://github.com/SDN-TU/autumn2023/assets/108898063/fae51b27-2747-4ebe-a4ef-ab28bdc071a4">
 
