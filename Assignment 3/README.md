@@ -1,0 +1,2 @@
+Question 3--> Write a ryu controller code for any topology such that communication is not available on a certain port. For e.g. in the following topology:
+if: port 50,000 is blocked then if h1 tries to send tcp packets to h2 on port 50,000 then, it should not allowed.
